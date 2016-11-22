@@ -1,0 +1,164 @@
+FORMAT: 1A
+HOST: http://notes.cuenca.co/
+
+# Laravel Notes API
+
+# Authentication
+The notes API demo uses token based authentication. Every request must be accompanied by a 60 characters client-token.
+
+# Notes [/api/v1/notes]
+
+## Get all notes [GET]
+Gets all notes for the user identified by the provided token.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id":1,
+                "user_id":1,
+                "message":"Note's message",
+                "created_at":"2016-11-22 21:41:48",
+                "updated_at":"2016-11-22 21:41:48"
+            },
+            {
+                "id":2,
+                "user_id":1,
+                "message":"Second note's message",
+                "created_at":"2016-11-22 21:51:48",
+                "updated_at":"2016-11-22 21:51:48"
+            }
+
+# Notes [/api/v1/notes/{id}]
+
+## Get a specific note [GET]
+Gets the notes with the given id if owned by the authenticaed user.
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id":1,
+                "user_id":1,
+                "message":"Note's message",
+                "created_at":"2016-11-22 21:41:48",
+                "updated_at":"2016-11-22 21:41:48"
+                "tags":[
+                    {
+                        "id":1,
+                        "name":"reminder"
+                    },
+                    {
+                        "id":2,
+                        "name":"to-do"
+                    },
+                    {
+                        "id":3,
+                        "name":"task"
+                    }
+                ]
+            }
+## Create note [PUT]
+Creates a new note and assigns its ownership to the current authenticated user.
+
++ Parameters
+
+    + message: string (required) - The notes' message content
+    + tags: string - Comma separated list of tags
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id":1,
+                "user_id":1,
+                "message":"Note's message",
+                "created_at":"2016-11-22 21:41:48",
+                "updated_at":"2016-11-22 21:41:48"
+                "tags":[
+                    {
+                        "id":1,
+                        "name":"reminder"
+                    },
+                    {
+                        "id":2,
+                        "name":"to-do"
+                    },
+                    {
+                        "id":3,
+                        "name":"task"
+                    }
+                ]
+            }
+
+
+## Update note [PUT]
+Modifies the properties of an existing note if it belongs to the authenticated user. Returns HTTP status code 404 if not existent or unauthorized.
+
++ Parameters
+
+    + id: integer (required) - Unique identifier for a note
+    + message: string (required) - The notes' message content
+    + tags: string - Comma separated list of tags
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id":1,
+                "user_id":1,
+                "message":"Note's message",
+                "created_at":"2016-11-22 21:41:48",
+                "updated_at":"2016-11-22 21:41:48"
+                "tags":[
+                    {
+                        "id":1,
+                        "name":"reminder"
+                    },
+                    {
+                        "id":2,
+                        "name":"to-do"
+                    },
+                    {
+                        "id":3,
+                        "name":"task"
+                    }
+                ]
+            }
+
+## Delete note [DELETE]
+Deletes an existing note if it belongs to the authenticated user. Returns a list of existing notes if successful or HTTP status code 404 if not existent or unauthorized.
+
++ Parameters
+
+    + id: integer (required) - Unique identifier for a note
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+                "id":1,
+                "user_id":1,
+                "message":"Note's message",
+                "created_at":"2016-11-22 21:41:48",
+                "updated_at":"2016-11-22 21:41:48"
+                "tags":[
+                    {
+                        "id":1,
+                        "name":"reminder"
+                    },
+                    {
+                        "id":2,
+                        "name":"to-do"
+                    },
+                    {
+                        "id":3,
+                        "name":"task"
+                    }
+                ]
+            }
